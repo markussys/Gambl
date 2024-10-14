@@ -9,9 +9,9 @@ light = viz.addLight()
 light.position(0, 5, 5)  # Set light position
 light.enable()
 
-# Create a plane to act as the video screen
-screen = vizshape.addPlane(size=(2, 1.5))
-screen.setPosition(0, 1.5, 3)  # Set screen position
+light = viz.addLight()
+light.position(0, 5, 5)  # Set light position
+light.enable()
 
 # Load the video
 video = viz.addVideo('DURDEN_EDIT.mp4')  # Replace with your video file
