@@ -41,6 +41,16 @@ illum 2
 map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-04 at 23.18.59(1)(1).png
 map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-04 at 23.18.59(1)(1).png
 
+newmtl Empty.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (3).jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (3).jpeg
+
 newmtl Empty.002
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
@@ -50,6 +60,56 @@ Ni 1.500000
 illum 2
 map_Kd C:/Users/aleks/Downloads/bar.jpeg
 map_d C:/Users/aleks/Downloads/bar.jpeg
+
+newmtl Empty.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (2).jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (2).jpeg
+
+newmtl Empty.005
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (1).jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.59 (1).jpeg
+
+newmtl Empty.008
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.58.jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.24.58.jpeg
+
+newmtl Empty.010
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.25.00 (1).jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.25.00 (1).jpeg
+
+newmtl Empty.012
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.25.00.jpeg
+map_d C:/Users/aleks/Downloads/WhatsApp Image 2024-11-11 at 08.25.00.jpeg
 
 newmtl Hardware
 Ns 200.000000
@@ -92,14 +152,14 @@ d 1.000000
 illum 2
 
 newmtl Material.001
-Ns 250.000000
+Ns 0.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.195672 0.059374 0.030826
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood wall.jpg
 
 newmtl Material.002
 Ns 0.000000
@@ -118,6 +178,26 @@ Kd 0.022198 0.176206 0.018635
 Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/aleks/Downloads/road.jpg
+
+newmtl Material.005
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800181 0.013637 0.004359
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
 d 1.000000
 illum 2
 
@@ -331,25 +411,25 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Material.028
+newmtl Material.027
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.066060 0.066060 0.066060
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
 
 newmtl Material.029
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.110595 0.110595 0.110595
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/road.jpg
 
 newmtl Material.030
 Ns 250.000000
@@ -374,12 +454,12 @@ illum 2
 newmtl Material.032
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.091686 0.038143 0.016021
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
 
 newmtl Material.033
 Ns 250.000000
@@ -411,85 +491,85 @@ Ni 1.500000
 d 1.000000
 illum 2
 
-newmtl Material.037
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.220369 0.055954 0.038344
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-
-newmtl Material.038
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.233367 0.061368 0.035988
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-
-newmtl Material.039
+newmtl Material.046
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.224653 0.059704 0.036607
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
 
-newmtl Material.040
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.228986 0.055988 0.038092
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-
-newmtl Material.041
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.191744 0.045650 0.037608
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-
-newmtl Material.042
+newmtl Material.047
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.220369 0.040390 0.038130
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
 
-newmtl Material.043
+newmtl Material.048
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.220369 0.044252 0.033061
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
 
-newmtl Material.044
+newmtl Material.049
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.154766 0.036627 0.024992
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
+
+newmtl Material.050
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
+
+newmtl Material.052
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
+
+newmtl Material.053
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/aleks/Downloads/wood.jpg
+
+newmtl Material.054
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/aleks/Downloads/roof.jpg
 
 newmtl Material__107
 Ns 0.000000
@@ -692,14 +772,14 @@ d 1.000000
 illum 2
 
 newmtl cottage_texture
-Ns 200.000000
+Ns 0.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.216132 0.075661 0.022897
 Ks 1.000000 1.000000 1.000000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
-illum 3
+illum 2
+map_Kd C:/Users/aleks/Downloads/wall.jpg
 
 newmtl folhas
 Ns 96.078453
