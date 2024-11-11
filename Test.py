@@ -36,6 +36,9 @@ apiks.setEuler(270,0)
 # Create colliders for models
 my_model.collideBox()  
 my_model.disable(viz.DYNAMICS)
+viz.MainView.setEuler([180, 0, 0]) 
+
+viz.MainView.setPosition([35, 0, 13])
 viz.MainView.collision(viz.ON)
 
 door = vizshape.addBox()
@@ -44,8 +47,13 @@ door.setPosition([2.7,1,8.5])
 
 # Setup camera with mouse look
 tracker = vizcam.addWalkNavigate(moveScale=2.0)
-tracker.setPosition(0, 0, 0)
+tracker.setPosition(35, 0, 13)
+tracker.setEuler([180, 0, 0])   # Set tracker initial position
+# Link tracker to MainView to control the view with navigation
 viz.link(tracker, viz.MainView)
+
+# Now set the initial position of the view (camera) after linking to the tracker
+ 
 viz.mouse.setVisible(False)
 
 # Add a 3D text object to display the object name
@@ -66,7 +74,7 @@ phone.setPosition(15, 0, -5)
 
 naskis = viz.add("naskis05.obj")
 naskis.setScale(0.25,0.25,0.25)
-naskis.setPosition(-1,0,5)
+naskis.setPosition(-1,0,4)
 naskis.setEuler(90, 0, 0)  # Rotate naskis by 90 degrees
 
 # Load the videos
@@ -122,7 +130,7 @@ vizact.ontimer(0, checkVideoStatus)
 def play_random_video():
     global coins, selected_video, is_video_playing
     if coins < 2:
-        displayTemporaryMessage("Man kontā nepietiek līdzekļu!", viz.RED)
+        displayTemporaryMessage("Not enough coins to play!", viz.RED)
         return
 
     # Deduct 2 coins for playing
@@ -210,10 +218,8 @@ def handleAnswer(choice):
             displayTemporaryMessage("Nav tava darīšana", color=viz.RED, duration=3)
             viz.playSound('Animal.mp3')
         elif choice == 2:
-            displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=5)
+            displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=3)
             viz.playSound('Animal.mp3')
-            vizact.waittime(3)
-            viz.playSound('explosion.mp3')
             door.remove() 
         naskis_prompt_active = False  # Reset naskis prompt flag
 
