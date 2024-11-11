@@ -122,7 +122,7 @@ vizact.ontimer(0, checkVideoStatus)
 def play_random_video():
     global coins, selected_video, is_video_playing
     if coins < 2:
-        displayTemporaryMessage("Not enough coins to play!", viz.RED)
+        displayTemporaryMessage("Man kontā nepietiek līdzekļu!", viz.RED)
         return
 
     # Deduct 2 coins for playing
@@ -210,8 +210,10 @@ def handleAnswer(choice):
             displayTemporaryMessage("Nav tava darīšana", color=viz.RED, duration=3)
             viz.playSound('Animal.mp3')
         elif choice == 2:
-            displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=3)
+            displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=5)
             viz.playSound('Animal.mp3')
+            vizact.waittime(3)
+            viz.playSound('explosion.mp3')
             door.remove() 
         naskis_prompt_active = False  # Reset naskis prompt flag
 
