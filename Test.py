@@ -2,8 +2,6 @@
 import vizshape
 import vizcam
 import vizact
-import vizinput
-import vizfx
 import random
 
 # Initialize Vizard environment
@@ -14,29 +12,35 @@ viz.phys.enable()
 # Set background color
 viz.clearcolor(viz.SKYBLUE)
 
-# Load models
-my_model = viz.add("play2.obj")
-my_model.setScale(0.1, 0.1, 0.1)
-my_model.setPosition(10, 0, 0)
-
-apiks = viz.add("GAMBLE.obj")
-apiks.setPosition(15, 0, 0)
-apiks.setScale(0.25, 0.25, 0.25)
-
-# Create colliders for models
-my_model.collideBox()  
-viz.phys.enable()
-my_model.disable(viz.DYNAMICS)
-viz.MainView.collision(viz.ON)
-
-# Setup lighting
-head_light = viz.MainView.getHeadLight()
-head_light.intensity(0.5)
-
+# Add directional light
 dir_light = viz.addDirectionalLight()
 dir_light.direction(0, -1, 0)
 dir_light.position(0, 100, 0)
-dir_light.intensity(0.8)
+dir_light.intensity(1)
+
+god = viz.add("god.obj")
+god.setPosition(20, 0, 9.5)
+god.setScale(0.18, 0.18, 0.18)
+god.setEuler(90, 0, 0)
+
+# Load models
+my_model = viz.add("play.obj")
+my_model.setScale(0.1, 0.07, 0.1)
+my_model.setPosition(10, 0, 0)
+
+apiks = viz.add("GAMBLE.obj")
+apiks.setPosition(15, 0, -0.7)
+apiks.setScale(0.25, 0.25, 0.25)
+apiks.setEuler(270,0)
+
+# Create colliders for models
+my_model.collideBox()  
+my_model.disable(viz.DYNAMICS)
+viz.MainView.collision(viz.ON)
+
+door = vizshape.addBox()
+door.setScale(4.3,4.5, 2)
+door.setPosition([2.7,1,8.5])
 
 # Setup camera with mouse look
 tracker = vizcam.addWalkNavigate(moveScale=2.0)
@@ -52,8 +56,18 @@ text2D.color(viz.BLACK)
 
 # Create a box to display the video
 box = vizshape.addBox()
-box.setScale(0.8, 1.1, 1.2)
-box.setPosition([14.8, 1.5, 0])  # Adjust position as necessary
+box.setScale(0.7, 1, 1)
+box.setPosition([15, 1.5, -0.7])
+box.setEuler(90,0)
+
+phone = viz.add("phone_booth.obj")
+phone.setScale(1, 1, 1)
+phone.setPosition(15, 0, -5)
+
+naskis = viz.add("naskis05.obj")
+naskis.setScale(0.25,0.25,0.25)
+naskis.setPosition(-1,0,5)
+naskis.setEuler(90, 0, 0)  # Rotate naskis by 90 degrees
 
 # Load the videos
 video_avg220 = viz.addVideo("AVG_220.mpg")
@@ -61,12 +75,13 @@ video_avg = viz.addVideo("AVG.mpg")
 video_brivenes = viz.addVideo("Brivenes.mpg")
 
 # Define the video options with AVG220 appearing more often
-videos = [video_avg220, video_avg220, video_avg220, video_avg, video_brivenes]
+videos = [video_avg220, video_avg220, video_avg220, video_avg, video_avg, video_avg, video_brivenes]
 
 # Initialize coin count
-coins = 20
+coins = 0
 selected_video = None  # To keep track of the video being played
 is_video_playing = False  # Track if a video is currently playing
+phone_interacted = False  # Flag to track if the phone has been interacted with
 
 # Display coin count on screen
 coinText = viz.addText(f'Coins: {coins}', parent=viz.SCREEN, pos=[0.1, 0.9, 0])
@@ -76,7 +91,7 @@ coinText.color(viz.YELLOW)
 # Function to update coin count display
 def updateCoins(amount):
     global coins
-    coins += amount
+    coins = round(coins + amount, 2)
     coinText.message(f'Coins: {coins}')
 
 # Function to handle end of video and award coins
@@ -84,22 +99,30 @@ def on_video_end(video):
     global selected_video, is_video_playing
     if video.getState() == viz.MEDIA_STOPPED and video == selected_video:
         if selected_video == video_avg:
+            viz.playSound('grrr.mp3')
             updateCoins(1.5)
             print("Finished AVG: +1.5 coins")
         elif selected_video == video_avg220:
             updateCoins(2.5)
+            viz.playSound('yipe.mp3')
             print("Finished AVG220: +2.5 coins")
         elif selected_video == video_brivenes:
-            updateCoins(207.20)
+            updateCoins(250) 
+            viz.playSound('yipe.mp3')# Fixed to 250 coins
             print("Finished Brivenes: +250 coins")
         selected_video = None  # Reset selected video
         is_video_playing = False  # Reset flag when video finishes
+        
+def checkVideoStatus():
+    if selected_video:
+        on_video_end(selected_video)
+vizact.ontimer(0, checkVideoStatus)
 
 # Function to select and play a random video, deducting coins upfront
 def play_random_video():
     global coins, selected_video, is_video_playing
     if coins < 2:
-        print("Not enough coins to play")
+        displayTemporaryMessage("Not enough coins to play!", viz.RED)
         return
 
     # Deduct 2 coins for playing
@@ -111,44 +134,114 @@ def play_random_video():
     selected_video.play()  # Play the video
     is_video_playing = True  # Set flag to indicate video is playing
 
-# Function to check if the object being looked at is 'apiks'
-def checkObject():
+# Function to check if the object being looked at is a specific target
+def checkObject(target):
     position = viz.MainView.getPosition()
     euler = viz.MainView.getEuler()
     direction = viz.Vector(0, 0, 1) * viz.Matrix.euler(euler)
     info = viz.intersect(position, [position[0] + direction[0] * 10, position[1] + direction[1] * 10, position[2] + direction[2] * 10])
 
-    if info.object == apiks:
-        text2D.message("Gamble Object")  # Display apiks name
+    if info.object == target:
+        text2D.message("Gamble Object" if target == apiks else "Phone" if target == phone else "Naskis")
         return True
     else:
         text2D.message('')
         return False
 
-# Key press function to play a random video when looking at 'apiks'
+promptText = viz.addText('', parent=viz.SCREEN, pos=[0.5, 0.5, 0])  # Define promptText globally
+promptText.alignment(viz.ALIGN_CENTER)
+promptText.fontSize(24)
+promptText.visible(False)
+
+# Function to display a message temporarily on the screen
+def displayTemporaryMessage(message, color=viz.WHITE, duration=2.5):
+    temp_text = viz.addText(message, parent=viz.SCREEN, pos=[0.5, 0.6, 0])
+    temp_text.fontSize(20)
+    temp_text.color(color)
+    
+    # Remove the text after the specified duration
+    vizact.ontimer2(duration, 0, temp_text.remove)
+
+# Initialize flags to track which prompt is active
+phone_prompt_active = False
+naskis_prompt_active = False
+
+# Function to display prompt for phone interaction
+def displayPhonePrompt():
+    global phone_interacted, phone_prompt_active, naskis_prompt_active
+    if not phone_interacted and not promptText.getVisible():
+        viz.playSound('Animal.mp3')
+        promptText.message("*Mamma: Sveiks dēls, ko vēlējies?:\n1. Vari atsūtīt 50 monētas priekš E-paraksta? \n2. Māt, man ir nepieciešamas 50 monētas, lai nopelnītu 1000000 monētas \n3. Neko")
+        promptText.visible(True)
+        phone_interacted = True  # Mark that the phone has been interacted with
+        phone_prompt_active = True  # Set phone prompt active
+        naskis_prompt_active = False  # Ensure naskis prompt is not active
+
+# Function to display prompt for naskis interaction
+def displayNaskisPrompt():
+    global phone_prompt_active, naskis_prompt_active
+    if not promptText.getVisible():
+        promptText.message("*Naskis05:Ko gribi nub?:\n1.Kas tu esi?\n2. Es mammai paprasiju naudu priekš E-paraksta!")
+        viz.playSound('Animal.mp3')
+        promptText.visible(True)
+        naskis_prompt_active = True  # Set naskis prompt active
+        phone_prompt_active = False  # Ensure phone prompt is not active
+
+# Function to handle answer input based on active prompt
+def handleAnswer(choice):
+    global phone_prompt_active, naskis_prompt_active
+    promptText.visible(False)  # Hide prompt after answering
+    
+    if phone_prompt_active:
+        if choice == 1:
+            updateCoins(50)  # Example: Add 50 coins for this choice
+            displayTemporaryMessage("Labi dēliņ!", color=viz.GREEN, duration=3)
+            viz.playSound('Animal.mp3')
+        elif choice == 2:
+            updateCoins(50)
+            displayTemporaryMessage("NEZVANI MAN VAIRS!", color=viz.RED, duration=3)
+            viz.playSound('Animal.mp3')
+        elif choice == 3:
+            displayTemporaryMessage(".......Ok", color=viz.RED, duration=3)
+        phone_prompt_active = False  # Reset phone prompt flag
+
+    elif naskis_prompt_active:
+        if choice == 1:
+            displayTemporaryMessage("Nav tava darīšana", color=viz.RED, duration=3)
+            viz.playSound('Animal.mp3')
+        elif choice == 2:
+            displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=3)
+            viz.playSound('Animal.mp3')
+            door.remove() 
+        naskis_prompt_active = False  # Reset naskis prompt flag
+
+# Key press function to handle interactions
 def onKeyDown(key):
-    if key == 'e' and checkObject() and not is_video_playing:  # Play video only if looking at apiks, pressing 'E', and no video is playing
+    global is_video_playing
+    
+    # If 'E' is pressed while looking at apiks
+    if key == 'e' and checkObject(apiks) and not is_video_playing:
         play_random_video()
+    
+    # If 'E' is pressed while looking at the phone
+    elif key == 'e' and checkObject(phone):
+        if phone_interacted:
+            displayTemporaryMessage("Labāk nezvanīšu viņai vairs", color=viz.RED, duration=2)
+        else:
+            displayPhonePrompt()
 
-# Bind key event
+    # If 'E' is pressed while looking at naskis
+    elif key == 'e' and checkObject(naskis):
+        displayNaskisPrompt()
+
+    # Check if a prompt is visible, then handle answers
+    if promptText.getVisible():
+        if key == '1':
+            handleAnswer(1)
+        elif key == '2':
+            handleAnswer(2)
+        elif key == '3':
+            handleAnswer(3)
+
+# Listen for key press events
 viz.callback(viz.KEYDOWN_EVENT, onKeyDown)
-
-# Monitor video playback state to award coins when video ends
-def checkVideoStatus():
-    if selected_video:
-        on_video_end(selected_video)
-
-# WASD movement function
-def Wpressed():
-    if viz.key.isDown(87):  # W
-        viz.MainView.move([0, 0, 2.0 * viz.elapsed()], viz.HEAD_ORI)
-    if viz.key.isDown(83):  # S
-        viz.MainView.move([0, 0, -2.0 * viz.elapsed()], viz.HEAD_ORI)
-    if viz.key.isDown(68):  # D
-        viz.MainView.move([-2.0 * viz.elapsed(), 0, 0], viz.HEAD_ORI)
-    if viz.key.isDown(65):  # A
-        viz.MainView.move([2.0 * viz.elapsed(), 0, 0], viz.HEAD_ORI)
-
-# Timer to check WASD movement and video status
-vizact.ontimer(0, Wpressed)
-vizact.ontimer(0, checkVideoStatus)
