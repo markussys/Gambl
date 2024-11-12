@@ -130,7 +130,7 @@ vizact.ontimer(0, checkVideoStatus)
 def play_random_video():
     global coins, selected_video, is_video_playing
     if coins < 2:
-        displayTemporaryMessage("Not enough coins to play!", viz.RED)
+        displayTemporaryMessage("Man nepietiek līdzekļu, laikam jāpazvana mammai!", viz.RED)
         return
 
     # Deduct 2 coins for playing
