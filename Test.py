@@ -150,7 +150,7 @@ def checkObject(target):
     info = viz.intersect(position, [position[0] + direction[0] * 10, position[1] + direction[1] * 10, position[2] + direction[2] * 10])
 
     if info.object == target:
-        text2D.message("Gamble Object" if target == apiks else "Phone" if target == phone else "Naskis")
+        text2D.message("Gamble Object" if target == apiks else "Phone" if target == phone else "god" if target==god else "Naskis" )
         return True
     else:
         text2D.message('')
@@ -220,8 +220,12 @@ def handleAnswer(choice):
         elif choice == 2:
             displayTemporaryMessage("MALACIS MANU PUIS. \n TAGAD TU VARĒSI NOSKAIDROT APARĀTU NOSLĒPUMU", color=viz.GREEN, duration=3)
             viz.playSound('Animal.mp3')
+            viz.playSound('explosion.mp3')
             door.remove() 
         naskis_prompt_active = False  # Reset naskis prompt flag
+        
+def godAudio():
+    viz.playSound('jesus.mp3')
 
 # Key press function to handle interactions
 def onKeyDown(key):
@@ -241,6 +245,9 @@ def onKeyDown(key):
     # If 'E' is pressed while looking at naskis
     elif key == 'e' and checkObject(naskis):
         displayNaskisPrompt()
+        
+    elif key == 'e' and checkObject(god):
+        godAudio()
 
     # Check if a prompt is visible, then handle answers
     if promptText.getVisible():
